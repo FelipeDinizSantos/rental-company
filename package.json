@@ -14,7 +14,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "dev": "ts-node-dev --inspect --transpile-only --ignore-watch noed_modules --respawn ./app/server.ts"
+    "serve": "ts-node-dev --inspect --transpile-only --ignore-watch noed_modules --respawn ./app/server.ts"
   },
   "devDependencies": {
     "@types/express": "^4.17.21",

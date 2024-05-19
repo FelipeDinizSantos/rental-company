@@ -7,17 +7,21 @@ interface ICreateUser{
     email: string;
 }
 
-const userRepository = new UserRepository();
-
 class CreateUserService{
-    async execute({name, email}:ICreateUser):Promise<User>{
-        const alredyExist = await userRepository.getUniqueByEmail(email);
+    private userRepository: UserRepository;
 
-        if(alredyExist){
+    constructor(){
+        this.userRepository = new UserRepository();
+    }
+
+    async execute({name, email}:ICreateUser):Promise<User>{
+        const alreadyExist = await this.userRepository.getOneByEmail(email);
+
+        if(alreadyExist){
             throw new AppError('User alredy exists!');
         }
 
-        const user = await userRepository.save({name, email});
+        const user = await this.userRepository.save({name, email});
         return user;
     }
 };
